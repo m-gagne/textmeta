@@ -4,13 +4,44 @@ TextMeta allows for processing of PDF files, it extracts the text & metadata usi
 
 ## Installation
 
-`npm install textmeta`
+    npm install textmeta
 
 ## Usage
 
+    var textmeta = require('textmeta');
+
+    var rules = [
+      {
+        key: "Author",
+        type: "FirstSingle",
+        expression: "Author:\\s+([^\\n]+)",
+        default: "Unknown"
+      }
+    ];
+
+    textmeta.extractFromPDFFile("samples/sample_doc.pdf", rules).then((result) => {
+      console.log("Text => " + result.text);
+      console.log("Metadata => " + JSON.stringify(result.meta, null, 4));
+    });
+
+
 For an example of the rules see the [rules.json](https://github.com/m-gagne/PDF2AzSearch/blob/master/functions/pdfmetafunc/rules.json) file from a sample Azure Function that uses this module.
 
-### rules.json basics
+## API
+
+### extractFromPDFFile(file, rules)
+
+Extracts text from the source PDF `file` and metadata using the supplied `rules`. Returns `{ text: "...", meta: {} }`.
+
+### extractFromPDFBuffer(buffer, rules)
+
+Extracts text from the supplied `buffer` and metadata using the supplied `rules`. Returns `{ text: "...", meta: {} }`.
+
+### processText(file, rules)
+
+Returns metadata using the supplied `text`.
+
+## Rules
 
 The format for a rule is
 
@@ -26,17 +57,17 @@ The format for a rule is
       }
     }
 
-#### Rule Types:
+### Rule Types:
 
 * "FirstSingle" : Will capture the first match.
 * "All" : Will capture all matches.
 * "AllUnique" : Will capture all matches and return the list of unique strings.
 
-#### Start/End Keywords
+### Start/End Keywords
 
-If you want to run your expression on a subset of the text, then specify the start/end keywords and only the text inbetween will be used.
+If you want to run your expression on a subset of the text, then specify the start/end keywords and only the text in between will be used.
 
-## Sample PDF
+### Sample PDF
 
 The result of processing the sample file [sample_doc.pdf](https://github.com/m-gagne/PDF2AzSearch/blob/master/sample/sample_doc.pdf) using the sample [rules.json](https://github.com/m-gagne/PDF2AzSearch/blob/master/functions/pdfmetafunc/rules.json) is the following result:
 
