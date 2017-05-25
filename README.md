@@ -2,6 +2,10 @@
 
 TextMeta allows for processing of PDF files, it extracts the text & metadata using rules (Regular Expressions) which is then returned in the format `{ "text": "extracted_text", meta: {}}`.
 
+## Installation
+
+`npm install textmeta`
+
 ## Usage
 
 For an example of the rules see the [rules.json](https://github.com/m-gagne/PDF2AzSearch/blob/master/functions/pdfmetafunc/rules.json) file from a sample Azure Function that uses this module.
@@ -58,4 +62,4 @@ The result of processing the sample file [sample_doc.pdf](https://github.com/m-g
 
 Originally I created an [Azure Function called PDF2Search](https://github.com/m-gagne/PDF2AzSearch_) that extracted text from a PDF file when stored in an Azure Storage blob container and realized it should exist outside of that project to be used elsewhere.
 
-Primarily it's helpful for people/organizations that have PDF documents of a specific format that makes running regular expressions against them to extract metadata possible. The idea being that the extracted text & metadata can be indexed using [Azure Search](https://azure.microsoft.com/en-us/services/search/) to more easily find the relevant document. 
+Primarily it's helpful for people/organizations that have PDF documents of a specific format that makes running regular expressions against them to extract metadata possible. The idea being that the extracted text & metadata can be indexed using [Azure Search](https://azure.microsoft.com/en-us/services/search/) to more easily find the relevant document.
