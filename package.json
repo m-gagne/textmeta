@@ -1,6 +1,6 @@
 {
   "name": "textmeta",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Document extraction & regex based rules engine to retrieve metadata from text.",
   "main": "index.js",
   "scripts": {
