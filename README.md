@@ -2,6 +2,10 @@
 
 TextMeta allows for processing of PDF files, it extracts the text & metadata using rules (Regular Expressions) which is then returned in the format `{ "text": "extracted_text", meta: {}}`.
 
+## Try It
+
+You can try it in your browser here: [http://textmeta.azurewebsites.net/](http://textmeta.azurewebsites.net/) using the sample [rules.json](https://github.com/m-gagne/PDF2AzSearch/blob/master/functions/pdfmetafunc/rules.json) & [sample pdf file](https://github.com/m-gagne/PDF2AzSearch/blob/master/sample/sample_doc.pdf).
+
 ## Installation
 
     npm install textmeta
