@@ -17,9 +17,9 @@
 const PDFTextExtractor = require('./lib/pdftextextractor.js');
 const RXProcessor = require('./lib/rxprocessor.js');
 
-function extractFromPDFFile(file, rules) {
+function extractFromPDFFile(file, rules, options) {
   return new Promise((resolve, reject) =>{
-    var pdfExtractor = new PDFTextExtractor();
+    var pdfExtractor = new PDFTextExtractor(options);
     pdfExtractor.getDataFromFile(file).then((data) => {
       let meta = processText(data.text, rules);
       resolve({
@@ -30,9 +30,9 @@ function extractFromPDFFile(file, rules) {
   });
 }
 
-function extractFromPDFBuffer(buffer, rules) {
+function extractFromPDFBuffer(buffer, rules, options) {
   return new Promise((resolve, reject) => {
-    var pdfExtractor = new PDFTextExtractor();
+    var pdfExtractor = new PDFTextExtractor(options);
     pdfExtractor.getDataFromBuffer(buffer).then((data) => {
       let meta = processText(data.text, rules);
       resolve({
@@ -43,9 +43,9 @@ function extractFromPDFBuffer(buffer, rules) {
   });
 }
 
-function processText(text, rules) {
+function processText(text, rules, options) {
   var rxProcessor = new RXProcessor();
-  return rxProcessor.process(text, rules);
+  return rxProcessor.process(text, rules, options);
 }
 
 exports.extractFromPDFFile = extractFromPDFFile;
