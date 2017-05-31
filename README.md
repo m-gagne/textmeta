@@ -35,18 +35,21 @@ For an example of the rules see the [rules.json](https://github.com/m-gagne/PDF2
 
 ### extractFromPDFFile(file, rules, options)
 
-Extracts text from the source PDF `file` and metadata using the supplied `rules`. Returns `{ text: "...", meta: {} }`.
-The `options` parameter is options, for more details see below.
+* Extracts text from the source PDF `file` and metadata using the supplied `rules`.
+* The `options` parameter is optional, for more details see below.
+* Returns `{ text: "...", meta: {} }`.
 
 ### extractFromPDFBuffer(buffer, rules, options)
 
-Extracts text from the supplied `buffer` and metadata using the supplied `rules`. Returns `{ text: "...", meta: {} }`.
-The `options` parameter is options, for more details see below.
+
+* Extracts text from the supplied `buffer` and metadata using the supplied `rules`.
+* The `options` parameter is optional, for more details see below.
+* Returns `{ text: "...", meta: {} }`.
 
 ### processText(file, rules, options)
 
-Returns metadata using the supplied `text`.
-The `options` parameter is options, for more details see below.
+* Returns metadata using the supplied `text`.
+* The `options` parameter is optional, for more details see below.
 
 ## Rules
 
