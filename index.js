@@ -15,12 +15,13 @@
 'use strict';
 
 const PDFTextExtractor = require('./lib/pdftextextractor.js');
+const ImageTextExtractor = require('./lib/imagetextextractor.js');
 const RXProcessor = require('./lib/rxprocessor.js');
 
 function extractFromPDFFile(file, rules, options) {
   return new Promise((resolve, reject) =>{
-    var pdfExtractor = new PDFTextExtractor(options);
-    pdfExtractor.getDataFromFile(file).then((data) => {
+    var extractor = new PDFTextExtractor(options);
+    extractor.getDataFromFile(file).then((data) => {
       let meta = processText(data.text, rules);
       resolve({
         text: data.text,
@@ -32,8 +33,34 @@ function extractFromPDFFile(file, rules, options) {
 
 function extractFromPDFBuffer(buffer, rules, options) {
   return new Promise((resolve, reject) => {
-    var pdfExtractor = new PDFTextExtractor(options);
-    pdfExtractor.getDataFromBuffer(buffer).then((data) => {
+    var extractor = new PDFTextExtractor(options);
+    extractor.getDataFromBuffer(buffer).then((data) => {
+      let meta = processText(data.text, rules);
+      resolve({
+        text: data.text,
+        meta: meta
+      });
+    });
+  });
+}
+
+function extractFromImageFile(file, rules, options) {
+  return new Promise((resolve, reject) => {
+    var extractor = new ImageTextExtractor(options);
+    extractor.getDataFromFile(file).then((data) => {
+      let meta = processText(data.text, rules);
+      resolve({
+        text: data.text,
+        meta: meta
+      });
+    });
+  });
+}
+
+function extractFromImageBuffer(buffer, rules, options) {
+  return new Promise((resolve, reject) => {
+    var extractor = new ImageTextExtractor(options);
+    extractor.getDataFromBuffer(buffer).then((data) => {
       let meta = processText(data.text, rules);
       resolve({
         text: data.text,
@@ -50,4 +77,6 @@ function processText(text, rules, options) {
 
 exports.extractFromPDFFile = extractFromPDFFile;
 exports.extractFromPDFBuffer = extractFromPDFBuffer;
+exports.extractFromImageFile = extractFromImageFile;
+exports.extractFromImageBuffer = extractFromImageBuffer;
 exports.processText = processText;
